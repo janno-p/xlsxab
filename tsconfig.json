@@ -1,0 +1,18 @@
+﻿{
+    "compilerOptions": {
+        "target": "es5",
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "moduleResolution": "node",
+        "removeComments": true,
+        "declaration": false,
+        "noEmitOnError": true,
+        "experimentalDecorators": true
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
