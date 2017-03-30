@@ -6,13 +6,24 @@
   "license": "MIT",
   "devDependencies": {
     "@types/electron": "^1.4.35",
+    "css-loader": "^0.28.0",
     "electron": "^1.6.2",
+    "electron-devtools-installer": "^2.1.0",
+    "element-ui": "^1.2.7",
     "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",
-    "webpack": "^2.3.2"
+    "vue": "^2.2.6",
+    "vue-electron": "^1.0.6",
+    "vue-loader": "^11.3.4",
+    "vue-property-decorator": "^4.0.0",
+    "vue-template-compiler": "^2.2.6",
+    "vuex": "^2.2.1",
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.2"
   },
   "scripts": {
     "start": "electron .",
-    "watch": "webpack --watch --progress --colors"
+    "watch": "webpack --watch --progress --colors",
+    "dev": "webpack-dev-server --hot --colors --config webpack.renderer.config.js --content-base . --port 8080"
   }
 }

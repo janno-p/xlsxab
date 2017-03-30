@@ -1,20 +1,26 @@
 ﻿var webpack = require("webpack");
+var path = require("path");
 
 module.exports = {
-    entry: "./src/index.ts",
+    devtool: "eval-source-map",
+    entry: "./src/main/index.ts",
     output: {
         filename: "./dist/index.js"
     },
     resolve: {
-        extensions: [".ts"]
+        extensions: [".js", ".json", ".ts"]
     },
     module: {
         rules: [
             {
                 test: /\.ts$/,
+                include: [path.join(__dirname, "src")],
                 use: "ts-loader"
             }
         ]
     },
-    target: "electron"
+    target: "electron-main",
+    devServer: {
+        overlay: true
+    }
 }
