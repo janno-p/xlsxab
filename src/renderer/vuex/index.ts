@@ -3,6 +3,14 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export const store = new Vuex.Store({
+interface IState {
+    dataFile: string;
+    templateFile: string;
+}
 
+export const store = new Vuex.Store<IState>({
+    state: {
+        dataFile: null,
+        templateFile: null
+    }
 });
