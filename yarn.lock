@@ -407,9 +407,9 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-cfb@~0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/cfb/-/cfb-0.11.0.tgz#3ab793e72ebaf16a4b8704133b6bed5a355ea6e2"
+cfb@~0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/cfb/-/cfb-0.11.1.tgz#a96db8f272a6c3fb99dbbb23ef41223f48be1ea7"
   dependencies:
     commander ""
 
@@ -801,13 +801,13 @@ debug@0.7.4:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-0.7.4.tgz#06e1ea8082c2cb14e39806e22e2f6f757f92af39"
 
-debug@2.6.1:
+debug@2.6.1, debug@^2.2.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
 
-debug@2.6.3, debug@^2.1.3, debug@^2.2.0:
+debug@2.6.3, debug@^2.1.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
   dependencies:
@@ -1124,9 +1124,9 @@ fd-slicer@~1.0.1:
   dependencies:
     pend "~1.2.0"
 
-file-loader@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.10.1.tgz#815034119891fc6441fb5a64c11bc93c22ddd842"
+file-loader@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.11.0.tgz#af018f39c44617305f1ee92f850c7a65a4331616"
   dependencies:
     loader-utils "^1.0.2"
 
@@ -1373,8 +1373,8 @@ hoek@2.x.x:
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
 home-path@^1.0.1:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.3.tgz#9ece59fec3f032e6d10b5434fee264df4c2de32f"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.5.tgz#788b29815b12d53bacf575648476e6f9041d133f"
 
 hosted-git-info@^2.1.4:
   version "2.4.1"
@@ -3481,12 +3481,12 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-xlsx@^0.9.7:
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.9.7.tgz#34e51bff475d0ff2350db569fa53da29fdfd3c29"
+xlsx@^0.9.8:
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.9.8.tgz#ab301a81f810849a82973473ba08230a9d385386"
   dependencies:
     adler-32 "~1.0.0"
-    cfb "~0.11.0"
+    cfb "~0.11.1"
     codepage "~1.8.0"
     commander "~2.9.0"
     crc-32 "~1.0.0"
