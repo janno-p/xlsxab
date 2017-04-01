@@ -2,18 +2,17 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Electron from "electron";
 
-@Component
-export default class App extends Vue {
-    indicator = "";
-    previewHeight = this.$electron.remote.getCurrentWindow().getContentBounds().height / 2;
+import StartUp from "./start-up.vue";
+import Workspace from "./workspace.vue";
 
-    mounted() {
-        var wv = this.$refs.webview as HTMLElement;
-        wv.addEventListener("did-start-loading", () => this.indicator = "Loading ...");
-        wv.addEventListener("did-stop-loading", () => this.indicator = "");
-        this.$electron.remote.getCurrentWindow().on("resize",
-            (e: any) => {
-                this.previewHeight = (<Electron.BrowserWindow>e.sender).getContentBounds().height / 2;
-            });
+@Component({
+    components: {
+        StartUp,
+        Workspace
+    }
+})
+export default class App extends Vue {
+    get componentName() {
+        return this.$store.state.hasWorkspace ? "workspace" : "start-up";
     }
 }
