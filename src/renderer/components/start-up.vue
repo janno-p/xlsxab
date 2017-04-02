@@ -36,7 +36,6 @@
 }
 </style>
 
-<script lang="ts">
-import StartUp from "./start-up.ts";
-export default StartUp;
+<script>
+module.exports = require("./start-up.ts");
 </script>

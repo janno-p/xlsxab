@@ -16,3 +16,5 @@ new Vue({
     render: h => h(App),
     store
 });
+
+import "font-awesome/css/font-awesome.css";

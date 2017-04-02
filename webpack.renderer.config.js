@@ -6,7 +6,8 @@ module.exports = {
     devtool: "eval-source-map",
     entry: "./src/renderer/index.ts",
     output: {
-        filename: "./dist/renderer.js"
+        filename: "./dist/renderer.js",
+        publicPath: "http://localhost:8080/"
     },
     resolve: {
         extensions: [".css", ".js", ".ts", ".vue"],
@@ -19,12 +20,7 @@ module.exports = {
             {
                 test: /\.ts$/,
                 include: [path.join(__dirname, "src")],
-                use: {
-                    loader: "ts-loader",
-                    options: {
-                        appendTsSuffixTo: [/\.vue$/]
-                    }
-                }
+                use: "awesome-typescript-loader"
             },
             {
                 test: /\.vue$/,
@@ -54,6 +50,7 @@ module.exports = {
             filename: "index.css",
             disable: false,
             allChunks: true
-        })
+        }),
+        new webpack.NamedModulesPlugin()
     ]
 }

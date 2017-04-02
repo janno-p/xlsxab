@@ -19,6 +19,8 @@ function createWindow() {
         height: 600
     });
 
+    //mainWindow.setMenu(null);
+
     /*mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, "..", "assets", "index.html"),
         protocol: "file",

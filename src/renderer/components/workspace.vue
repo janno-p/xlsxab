@@ -1,22 +1,19 @@
 <template>
     <div>
+        <div>
+            <el-button type="primary">
+                <i class="fa fa-refresh"></i>
+                Reload Files
+            </el-button>
+        </div>
         <webview
             ref="webview"
             src="file:///home/janno/Desktop/BT%20email%20template.html"
-            :style="{ height: previewHeight + 'px' }"
+            :style="{ height: 'calc(100vh - 1.5em - 36px)', 'margin-top': '0.5em' }"
         ></webview>
-        <el-row>
-            <el-col :span="12">
-                <h1 style="background-color: red">Hello, World</h1>
-            </el-col>
-            <el-col :span="12">
-                {{ indicator }}
-            </el-col>
-        </el-row>
     </div>
 </template>
 
-<script lang="ts">
-import Workspace from "./workspace.ts";
-export default Workspace;
+<script>
+module.exports = require("./workspace.ts");
 </script>
