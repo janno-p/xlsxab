@@ -1,32 +1,32 @@
 import Vue from "vue";
-import { Component } from "vue-property-decorator"
+import { Component } from "vue-property-decorator";
 import { OPEN_WORKSPACE } from "../vuex/mutation-types";
 
 @Component
 export default class StartUp extends Vue {
-    dataFile: any = null;
-    templateFile: any = null;
+    private dataFile: any = null;
+    private templateFile: any = null;
 
-    setDataFile(file: any) {
+    private setDataFile(file: any) {
         this.dataFile = file;
     }
 
-    removeDataFile() {
+    private removeDataFile() {
         this.dataFile = null;
     }
 
-    setTemplateFile(file: any) {
+    private setTemplateFile(file: any) {
         this.templateFile = file;
     }
 
-    removeTemplateFile() {
+    private removeTemplateFile() {
         this.templateFile = null;
     }
 
-    openWorkspace() {
+    private openWorkspace() {
         this.$store.commit(OPEN_WORKSPACE, {
             dataFile: this.dataFile.raw.path,
-            templateFile: this.templateFile.raw.path
+            templateFile: this.templateFile.raw.path,
         });
     }
 }

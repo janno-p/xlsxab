@@ -1,6 +1,7 @@
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
 import Electron from "electron";
+import Vue from "vue";
+
+import { Component } from "vue-property-decorator";
 
 import StartUp from "./start-up.vue";
 import Workspace from "./workspace.vue";
@@ -8,8 +9,8 @@ import Workspace from "./workspace.vue";
 @Component({
     components: {
         StartUp,
-        Workspace
-    }
+        Workspace,
+    },
 })
 export default class App extends Vue {
     get componentName() {

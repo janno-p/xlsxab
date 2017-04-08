@@ -1,5 +1,5 @@
 export default {
-    dataFile: <string>null,
-    templateFile: <string>null,
-    hasWorkspace: false
+    dataFile: null as string,
+    hasWorkspace: false,
+    templateFile: null as string,
 };

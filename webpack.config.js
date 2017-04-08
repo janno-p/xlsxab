@@ -13,6 +13,17 @@ module.exports = {
     module: {
         rules: [
             {
+                enforce: "pre",
+                exclude: /node_modules/,
+                test: /\.ts$/,
+                use: {
+                    loader: "tslint-loader",
+                    options: {
+                        emitErrors: true
+                    }
+                }
+            },
+            {
                 test: /\.ts$/,
                 include: [path.join(__dirname, "src")],
                 use: "awesome-typescript-loader"
