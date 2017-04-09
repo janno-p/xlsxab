@@ -1,12 +1,19 @@
 import xlsx from "xlsx";
 
+interface IFlight {
+    origin: string;
+    destination: string;
+    price: string;
+    disclaimer: boolean;
+}
+
 interface IMarket {
     flights: any[];
 }
 
 interface ILanguage {
-    [index: number]: string;
-    markets: {};
+    text: { [index: number ]: string; };
+    markets: IMarket[];
 }
 
 interface ILanguageList {
@@ -40,7 +47,7 @@ export default class DataDefinition {
         const range = xlsx.utils.decode_range(worksheet["!ref"]);
         this._languages = {};
         for (let col = range.s.c; col <= range.e.c; col++) {
-            const language = { markets: {} } as ILanguage;
+            const language = { text: {}, markets: {} } as ILanguage;
             const getName = () => {
                 if (col === 0) {
                     return "default";
@@ -55,7 +62,7 @@ export default class DataDefinition {
                 const cellref = xlsx.utils.encode_cell({ c: col, r: row });
                 const cell: xlsx.IWorkSheetCell = worksheet[cellref];
                 if (!!cell && !!cell.v) {
-                    language[row] = String(cell.v);
+                    language.text[row] = String(cell.v);
                 }
             }
         }
@@ -64,17 +71,28 @@ export default class DataDefinition {
     private loadMarkets(worksheet: xlsx.IWorkSheet) {
         const range = xlsx.utils.decode_range(worksheet["!ref"]);
         let activeMarket: IMarket = null;
-        for (let row = range.s.r + 2; row <= range.e.r; row += 4) {
+        for (let row = range.s.r + 2; row <= range.e.r; row++) {
             const cellref = xlsx.utils.encode_cell({ c: 0, r: row });
             const cell: xlsx.IWorkSheetCell = worksheet[cellref];
             const originCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 3, r: row })];
-            if ((!activeMarket && !cell) || !originCell) {
+            if ((!activeMarket && !cell) || (!!activeMarket && !originCell)) {
                 continue;
             }
-            const name = String(cell.v);
-            const languageCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 1, r: row })];
-            const language = this._languages[String(languageCell.v).toUpperCase()];
-            activeMarket = (language.markets[name] || (language.markets[name] = {}));
+            if (!!cell) {
+                const name = String(cell.v);
+                const languageCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 1, r: row })];
+                const language = this._languages[String(languageCell.v).toUpperCase()];
+                activeMarket = (language.markets[name] || (language.markets[name] = { flights: [] }));
+            }
+            const destinationCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 4, r: row })];
+            const priceCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 5, r: row })];
+            const disclaimerCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 6, r: row })];
+            activeMarket.flights.push({
+                destination: String(destinationCell.v),
+                disclaimer: !!disclaimerCell && String(disclaimerCell.v).trim() === "*",
+                origin: String(originCell.v),
+                price: String(priceCell.v),
+            });
         }
         console.log(worksheet);
     }
