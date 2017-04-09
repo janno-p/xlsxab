@@ -5,23 +5,22 @@
                 <div class="col-md-2">
                     <ui-button
                         color="primary"
-                        @click="model.loadData()"
+                        @click="refresh"
                     ><i class="fa fa-refresh"></i>&nbsp;Reload Files
                     </ui-button>
                 </div>
                 <div class="col-md-3">
                     <ui-select
-                        :label="null"
                         placeholder="Select template"
                         :disabled="templates.length === 0"
+                        :keys="{ label: 'basename', value: 'filepath' }"
                         :options="templates"
                         v-model="activeTemplate"
-                    ><i class="fa fa-language" slot="icon"></i>
+                    ><i class="fa fa-file-o" slot="icon"></i>
                     </ui-select>
                 </div>
                 <div class="col-md-3">
                     <ui-select
-                        :label="null"
                         placeholder="Select preview language"
                         :disabled="languages.length === 0"
                         :options="languages"
@@ -44,8 +43,8 @@
         <div class="panel-body">
             <webview
                 ref="webview"
-                :src="activeTemplate"
-                :style="{ height: 'calc(100vh - 138px)', 'margin-top': '0.5em' }"
+                :src="'file:' + (!!activeTemplate ? activeTemplate.filepath : '')"
+                :style="{ height: 'calc(100vh - 148px)', 'margin-top': '0.5em' }"
             ></webview>
         </div>
     </div>

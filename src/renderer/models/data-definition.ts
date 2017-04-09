@@ -11,7 +11,7 @@ interface IMarket {
     flights: any[];
 }
 
-interface ILanguage {
+export interface ILanguage {
     text: { [index: number ]: string; };
     markets: IMarket[];
 }
@@ -40,7 +40,6 @@ export default class DataDefinition {
         const workbook = xlsx.readFile(this._fileName);
         this.loadLanguages(workbook.Sheets[this._languagesSheet]);
         this.loadMarkets(workbook.Sheets[this._marketsSheet]);
-        console.log(this._languages);
     }
 
     private loadLanguages(worksheet: xlsx.IWorkSheet) {
@@ -94,6 +93,5 @@ export default class DataDefinition {
                 price: String(priceCell.v),
             });
         }
-        console.log(worksheet);
     }
 }

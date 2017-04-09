@@ -1,3 +1,4 @@
+import path from "path";
 import Vue from "vue";
 
 import {
@@ -6,7 +7,9 @@ import {
     Watch,
 } from "vue-property-decorator";
 
-import DataDefinition from "../models/data-definition";
+import DataDefinition, {
+    ILanguage,
+} from "../models/data-definition";
 
 @Component
 export default class Workspace extends Vue {
@@ -15,6 +18,8 @@ export default class Workspace extends Vue {
     private activeLanguage = "DEFAULT";
     private activeMarket = "";
     private activeTemplate = "";
+    private languages: string[] = [];
+    private markets: string[] = [];
 
     private mounted() {
         const wv = this.$refs.webview as HTMLElement;
@@ -25,34 +30,27 @@ export default class Workspace extends Vue {
                 const browserWindow = e.sender as Electron.BrowserWindow;
                 this.previewHeight = browserWindow.getContentBounds().height / 2;
             });
-        this.$nextTick(() => {
-            this.model.loadData();
-        });
+        this.refresh();
+    }
+
+    private refresh() {
+        const data = this.$store.state.dataDefinition;
+        data.loadData();
+        Vue.set(this, "languages", Object.keys(data.languages || {}).sort());
     }
 
     get templates() {
-        return this.$store.state.templateFiles as string[];
-    }
-
-    get model() {
-        return this.$store.state.dataDefinition as DataDefinition;
-    }
-
-    get languages() {
-        return Object.keys(this.model.languages).sort();
-    }
-
-    get markets() {
-        return Object.keys(this.model.languages[this.activeLanguage].markets);
-    }
-
-    private reloadData() {
-        const data = this.$store.state.dataDefinition as DataDefinition;
-        data.loadData();
+        return (this.$store.state.templateFiles as string[] || []).map((f) => ({
+            basename: path.basename(f),
+            filepath: f,
+        }));
     }
 
     @Watch("activeLanguage")
-    private changeLanguage() {
+    private changeLanguage(selectedLanguage: string) {
         this.activeMarket = "";
+        const ls = this.$store.state.dataDefinition.languages || {};
+        const l: ILanguage = ls[selectedLanguage] || ({} as ILanguage);
+        Vue.set(this, "markets", Object.keys(l.markets || {}).sort());
     }
 }
