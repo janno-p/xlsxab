@@ -9,13 +9,13 @@
                 label="Translations Worksheet"
                 placeholder="Select translations worksheet"
                 :options="worksheets"
-                v-model="translationsSheet"
+                v-model="translations"
             ></ui-select>
             <ui-select
                 label="City Pairs Worksheet"
                 placeholder="Select city pairs worksheet"
                 :options="worksheets"
-                v-model="cityPairsSheet"
+                v-model="destinations"
             ></ui-select>
         </template>
     </div>

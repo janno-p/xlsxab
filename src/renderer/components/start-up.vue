@@ -14,7 +14,11 @@
                             <i slot="icon" class="fa fa-file-excel-o"></i>
                             Choose data file (.xlsx)
                         </ui-fileupload>
-                        <sheet-selector :file="dataFile" v-if="!!dataFile" />
+                        <sheet-selector
+                            v-if="!!dataFile"
+                            :file="dataFile"
+                            v-model="dataDefinition"
+                        />
                     </li>
                     <li class="list-group-item">
                         <ui-fileupload name="template" :raised="true" :multiple="true" @change="changeTemplateFiles">
@@ -29,7 +33,7 @@
                 <div class="panel-footer text-right">
                     <ui-button
                         color="green"
-                        :disabled="!dataFile || templateFiles.length === 0"
+                        :disabled="!allowOpenWorkspace"
                         @click="openWorkspace"
                     >Open Workspace</ui-button>
                 </div>

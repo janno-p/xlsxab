@@ -1,5 +1,11 @@
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+
+import {
+    Component,
+    Prop,
+} from "vue-property-decorator";
+
+import DataDefinition from "../models/data-definition";
 
 @Component
 export default class Workspace extends Vue {
@@ -19,5 +25,12 @@ export default class Workspace extends Vue {
 
     get template() {
         return `${this.$store.state.templateFiles[0]}`;
+    }
+
+    private reloadData() {
+        const data = this.$store.state.dataDefinition as DataDefinition;
+        data.loadData();
+        // console.log(data.translationData);
+        // console.log(data.destinationData);
     }
 }

@@ -1,5 +1,7 @@
+import DataDefinition from "../models/data-definition";
+
 export default {
-    dataFile: null as string,
+    dataDefinition: null as DataDefinition,
     hasWorkspace: false,
     templateFiles: null as string,
 };

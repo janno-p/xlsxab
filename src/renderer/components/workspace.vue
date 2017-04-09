@@ -1,7 +1,11 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <ui-button color="primary"><i class="fa fa-refresh"></i>&nbsp;Reload Files</ui-button>
+            <ui-button
+                color="primary"
+                @click="reloadData"
+            ><i class="fa fa-refresh"></i>&nbsp;Reload Files
+            </ui-button>
         </div>
         <div class="panel-body">
             <webview
