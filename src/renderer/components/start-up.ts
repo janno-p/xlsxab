@@ -2,31 +2,34 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import { OPEN_WORKSPACE } from "../vuex/mutation-types";
 
-@Component
+import SheetSelector from "./sheet-selector.vue";
+
+@Component({
+    components: {
+        SheetSelector,
+    },
+})
 export default class StartUp extends Vue {
-    private dataFile: any = null;
-    private templateFile: any = null;
+    private dataFile: string = null;
+    private templateFiles: string[] = [];
 
-    private setDataFile(file: any) {
-        this.dataFile = file;
+    private changeDataFile(files: FileList) {
+        this.dataFile = files[0].path;
     }
 
-    private removeDataFile() {
-        this.dataFile = null;
-    }
-
-    private setTemplateFile(file: any) {
-        this.templateFile = file;
-    }
-
-    private removeTemplateFile() {
-        this.templateFile = null;
+    private changeTemplateFiles(files: FileList) {
+        const fileList = [];
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < files.length; i++) {
+            fileList.push(files[i].path);
+        }
+        Vue.set(this, "templateFiles", fileList);
     }
 
     private openWorkspace() {
         this.$store.commit(OPEN_WORKSPACE, {
-            dataFile: this.dataFile.raw.path,
-            templateFile: this.templateFile.raw.path,
+            dataFile: this.dataFile,
+            templateFiles: this.templateFiles,
         });
     }
 }

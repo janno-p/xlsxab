@@ -16,4 +16,8 @@ export default class Workspace extends Vue {
                 this.previewHeight = browserWindow.getContentBounds().height / 2;
             });
     }
+
+    get template() {
+        return `${this.$store.state.templateFiles[0]}`;
+    }
 }

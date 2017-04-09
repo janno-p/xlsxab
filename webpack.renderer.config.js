@@ -62,6 +62,9 @@ module.exports = {
             disable: false,
             allChunks: true
         }),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new webpack.ProvidePlugin({
+            jQuery: "jquery"
+        })
     ]
 }

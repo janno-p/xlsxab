@@ -1,19 +1,18 @@
 <template>
-    <div>
-        <div>
-            <el-button type="primary">
-                <i class="fa fa-refresh"></i>
-                Reload Files
-            </el-button>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <ui-button color="primary"><i class="fa fa-refresh"></i>&nbsp;Reload Files</ui-button>
         </div>
-        <webview
-            ref="webview"
-            src="file:///home/janno/Desktop/BT%20email%20template.html"
-            :style="{ height: 'calc(100vh - 1.5em - 36px)', 'margin-top': '0.5em' }"
-        ></webview>
+        <div class="panel-body">
+            <webview
+                ref="webview"
+                :src="template"
+                :style="{ height: 'calc(100vh - 138px)', 'margin-top': '0.5em' }"
+            ></webview>
+        </div>
     </div>
 </template>
 
 <script>
-module.exports = require("./workspace.ts");
+module.exports = require("./workspace");
 </script>

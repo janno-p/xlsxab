@@ -1,4 +1,4 @@
-declare module "element-ui" {
+declare module "keen-ui" {
     import { PluginFunction } from "vue";
     export const install: PluginFunction<{}>;
 }

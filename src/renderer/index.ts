@@ -3,10 +3,12 @@ import Electron from "vue-electron";
 
 Vue.use(Electron);
 
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-default/index.css";
+import KeenUI from "keen-ui";
+import "keen-ui/dist/keen-ui.css";
 
-Vue.use(ElementUI);
+Vue.use(KeenUI);
+
+import "bootstrap";
 
 import { store } from "./vuex";
 
@@ -19,4 +21,6 @@ new Vue({
     store,
 });
 
+import "bootstrap/dist/css/bootstrap-theme.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
