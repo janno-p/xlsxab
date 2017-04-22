@@ -1,4 +1,7 @@
+import fs from "fs";
+import handlebars from "handlebars";
 import path from "path";
+import tmp from "tmp";
 import Vue from "vue";
 
 import {
@@ -20,6 +23,8 @@ export default class Workspace extends Vue {
     private activeTemplate = "";
     private languages: string[] = [];
     private markets: string[] = [];
+    private templateInst: HandlebarsTemplateDelegate;
+    private f: string = "";
 
     private mounted() {
         const wv = this.$refs.webview as HTMLElement;
@@ -36,6 +41,7 @@ export default class Workspace extends Vue {
     private refresh() {
         const data = this.$store.state.dataDefinition;
         data.loadData();
+        console.log(data);
         Vue.set(this, "languages", Object.keys(data.languages || {}).sort());
     }
 
@@ -52,5 +58,27 @@ export default class Workspace extends Vue {
         const ls = this.$store.state.dataDefinition.languages || {};
         const l: ILanguage = ls[selectedLanguage] || ({} as ILanguage);
         Vue.set(this, "markets", Object.keys(l.markets || {}).sort());
+    }
+
+    @Watch("activeLanguage")
+    @Watch("activeTemplate")
+    private changeTemplate() {
+        if (!!this.activeTemplate) {
+            const c = fs.readFileSync((this.activeTemplate as any).filepath, "utf8");
+            this.templateInst = handlebars.compile(c);
+
+            const l = this.$store.state.dataDefinition.languages[this.activeLanguage].text as object;
+            const d = {};
+            for (const k in Object.keys(l)) {
+                if (l.hasOwnProperty(k)) {
+                    d["t" + (Number(k) + 1)] = l[k];
+                }
+            }
+
+            const x = this.templateInst(d);
+            const f = tmp.tmpNameSync({ postfix: ".htm" });
+            fs.writeFileSync(f, x);
+            this.f = "file:" + f;
+        }
     }
 }

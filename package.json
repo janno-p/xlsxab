@@ -6,6 +6,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/electron": "^1.4.37",
+    "@types/handlebars": "^4.0.32",
+    "@types/tmp": "^0.0.32",
     "@types/xlsx": "^0.0.34",
     "awesome-typescript-loader": "^3.1.2",
     "bootstrap": "^3.3.7",
@@ -15,9 +17,11 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "font-awesome": "^4.7.0",
+    "handlebars": "^4.0.6",
     "jquery": "^3.2.1",
     "keen-ui": "^1.0.0",
     "style-loader": "^0.16.1",
+    "tmp": "^0.0.31",
     "ts-loader": "^2.0.3",
     "tslint": "^5.1.0",
     "tslint-loader": "^3.5.3",
@@ -36,6 +40,5 @@
     "start": "electron .",
     "watch": "webpack --watch --progress --colors",
     "dev": "webpack-dev-server --hot --hot-only --inline --colors --config webpack.renderer.config.js --content-base . --port 8080"
-  },
-  "dependencies": {}
+  }
 }
