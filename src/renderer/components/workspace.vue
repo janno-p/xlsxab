@@ -43,7 +43,7 @@
         <div class="panel-body">
             <webview
                 ref="webview"
-                :src="'file:' + (!!activeTemplate ? activeTemplate.filepath : '')"
+                :src="f"
                 :style="{ height: 'calc(100vh - 148px)', 'margin-top': '0.5em' }"
             ></webview>
         </div>
