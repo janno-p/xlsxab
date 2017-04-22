@@ -10,6 +10,9 @@ module.exports = {
         publicPath: "http://localhost:8080/"
     },
     resolve: {
+        alias: {
+            handlebars: "handlebars/dist/handlebars.js"
+        },
         extensions: [".css", ".js", ".ts", ".vue"],
         modules: [
             "node_modules"
