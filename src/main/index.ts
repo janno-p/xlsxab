@@ -12,21 +12,27 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow: Electron.BrowserWindow = null;
 
 function createMenu() {
+    const menu = new electron.Menu();
     const fileMenu = new electron.Menu();
+    const workspaceMenu = new electron.Menu();
 
-    fileMenu.append(new electron.MenuItem({
+    workspaceMenu.append(new electron.MenuItem({
         click: (e) => {
             mainWindow.webContents.send("reload-files");
         },
         label: "Reload files",
     }));
 
-    fileMenu.append(new electron.MenuItem({
+    workspaceMenu.append(new electron.MenuItem({
+        click: (e) => {
+            const directory = electron.dialog.showOpenDialog(mainWindow, {
+                properties: ["openDirectory"],
+            });
+            if (!!directory) {
+                mainWindow.webContents.send("export-files", directory[0]);
+            }
+        },
         label: "Save to folder",
-    }));
-
-    fileMenu.append(new electron.MenuItem({
-        type: "separator",
     }));
 
     fileMenu.append(new electron.MenuItem({
@@ -34,14 +40,20 @@ function createMenu() {
         label: "Quit",
     }));
 
-    const fileMenuItem = new electron.MenuItem({
+    menu.append(new electron.MenuItem({
         label: "File",
         submenu: fileMenu,
+    }));
+
+    const workspaceMenuItem = new electron.MenuItem({
+        label: "Workspace",
+        submenu: workspaceMenu,
     });
 
-    const menu = new electron.Menu();
-
-    menu.append(fileMenuItem);
+    electron.ipcMain.on("enable-menus", () => {
+        menu.append(workspaceMenuItem);
+        mainWindow.setMenu(menu);
+    });
 
     return menu;
 }

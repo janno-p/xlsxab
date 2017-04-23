@@ -44,9 +44,15 @@ export default class Workspace extends Vue {
             });
         this.refresh();
 
+        electron.ipcRenderer.send("enable-menus");
+
         electron.ipcRenderer.on("reload-files", () => {
             this.refresh();
             this.changeTemplate();
+        });
+
+        electron.ipcRenderer.on("export-files", (e, directory) => {
+            console.log("Exporting files to directory: " + directory);
         });
     }
 
