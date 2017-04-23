@@ -1,8 +1,11 @@
+import fs from "fs";
 import xlsx from "xlsx";
 
 interface IFlight {
     origin: string;
+    originCode: string;
     destination: string;
+    destinationCode: string;
     price: string;
     disclaimer: boolean;
 }
@@ -20,11 +23,16 @@ interface ILanguageList {
     [code: string]: ILanguage;
 }
 
+interface IAirportList {
+    [code: string]: string;
+}
+
 export default class DataDefinition {
     private _fileName: string;
     private _languagesSheet: string;
     private _marketsSheet: string;
     private _languages: ILanguageList;
+    private _airports: IAirportList;
 
     get languages() {
         return this._languages;
@@ -37,6 +45,7 @@ export default class DataDefinition {
     }
 
     public loadData() {
+        this._airports = JSON.parse(fs.readFileSync("./data/airport-codes.json", "utf8"));
         const workbook = xlsx.readFile(this._fileName);
         this.loadLanguages(workbook.Sheets[this._languagesSheet]);
         this.loadMarkets(workbook.Sheets[this._marketsSheet]);
@@ -86,10 +95,14 @@ export default class DataDefinition {
             const destinationCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 4, r: row })];
             const priceCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 5, r: row })];
             const disclaimerCell: xlsx.IWorkSheetCell = worksheet[xlsx.utils.encode_cell({ c: 6, r: row })];
+            const destinationCode = String(destinationCell.v);
+            const originCode = String(originCell.v);
             activeMarket.flights.push({
-                destination: String(destinationCell.v),
+                destination: this._airports[destinationCode],
+                destinationCode,
                 disclaimer: !!disclaimerCell && String(disclaimerCell.v).trim() === "*",
-                origin: String(originCell.v),
+                origin: this._airports[originCode],
+                originCode,
                 price: String(priceCell.v),
             });
         }
