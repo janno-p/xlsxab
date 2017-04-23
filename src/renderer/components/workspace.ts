@@ -21,10 +21,10 @@ export default class Workspace extends Vue {
     private activeLanguage = "DEFAULT";
     private activeMarket = "";
     private activeTemplate = "";
-    private languages: string[] = [];
-    private markets: string[] = [];
+    private languages = new Array<string>();
+    private markets = new Array<string>();
     private templateInst: HandlebarsTemplateDelegate;
-    private f: string = "";
+    private previewFile: string = "";
 
     private mounted() {
         const wv = this.$refs.webview as HTMLElement;
@@ -53,16 +53,14 @@ export default class Workspace extends Vue {
     }
 
     @Watch("activeLanguage")
-    private changeLanguage(selectedLanguage: string) {
-        this.activeMarket = "";
-        const ls = this.$store.state.dataDefinition.languages || {};
-        const l: ILanguage = ls[selectedLanguage] || ({} as ILanguage);
-        Vue.set(this, "markets", Object.keys(l.markets || {}).sort());
-    }
-
-    @Watch("activeLanguage")
     @Watch("activeTemplate")
     private changeTemplate() {
+        const language = !!this.activeLanguage
+            ? this.$store.state.dataDefinition.languages[this.activeLanguage]
+            : null;
+
+        this.fillMarketSelection(language);
+
         if (!!this.activeTemplate) {
             const c = fs.readFileSync((this.activeTemplate as any).filepath, "utf8");
             this.templateInst = handlebars.compile(c);
@@ -75,10 +73,35 @@ export default class Workspace extends Vue {
                 }
             }
 
+            const wv = this.$refs.webview as Electron.WebViewElement;
+
+            const registerListener = (pos: number) => {
+                const listener = () => {
+                    wv.removeEventListener("did-stop-loading", listener);
+                    wv.executeJavaScript(`document.body.scrollTop = ${pos}`);
+                };
+                wv.addEventListener("did-stop-loading", listener);
+            };
+
+            (wv as Electron.WebViewElement).executeJavaScript("document.body.scrollTop;",
+                false,
+                (r) => registerListener(Number(r)));
+
             const x = this.templateInst(d);
             const f = tmp.tmpNameSync({ postfix: ".htm" });
             fs.writeFileSync(f, x);
-            this.f = "file:" + f;
+            this.previewFile = "file:" + f;
         }
+    }
+
+    private fillMarketSelection(language: ILanguage) {
+        const markets = Object.keys(!!language ? language.markets || {} : {}).sort();
+        Vue.set(this, "markets", markets);
+        if (markets.length === 0) {
+            this.activeMarket = "";
+            return;
+        }
+        const indexOfLanguage = markets.indexOf(this.activeLanguage);
+        this.activeMarket = markets[indexOfLanguage >= 0 ? indexOfLanguage : 0];
     }
 }

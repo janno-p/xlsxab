@@ -12,13 +12,15 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow: Electron.BrowserWindow = null;
 
 function createWindow() {
-    installExtensions(VUEJS_DEVTOOLS)
-        .then((name) => console.log(`Added extension: ${name}`))
-        .catch((err) => console.log("Unable to install `vue-devtools`:\n", err));
-
     mainWindow = new BrowserWindow({
         height: 600,
         width: 800,
+    });
+
+    mainWindow.webContents.on("devtools-opened", () => {
+        installExtensions(VUEJS_DEVTOOLS)
+            .then((name) => console.log(`Added extension: ${name}`))
+            .catch((err) => console.log("Unable to install `vue-devtools`:\n", err));
     });
 
     // mainWindow.setMenu(null);

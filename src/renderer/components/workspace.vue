@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-3">
                     <ui-select
-                        placeholder="Select template"
+                        placeholder="Choose template"
                         :disabled="templates.length === 0"
                         :keys="{ label: 'basename', value: 'filepath' }"
                         :options="templates"
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-3">
                     <ui-select
-                        placeholder="Select preview language"
+                        placeholder="No languages found"
                         :disabled="languages.length === 0"
                         :options="languages"
                         v-model="activeLanguage"
@@ -31,7 +31,7 @@
                 <div class="col-md-3">
                     <ui-select
                         :label="null"
-                        placeholder="Select market"
+                        placeholder="No markets for language"
                         :disabled="markets.length === 0"
                         :options="markets"
                         v-model="activeMarket"
@@ -43,7 +43,7 @@
         <div class="panel-body">
             <webview
                 ref="webview"
-                :src="f"
+                :src="previewFile"
                 :style="{ height: 'calc(100vh - 148px)', 'margin-top': '0.5em' }"
             ></webview>
         </div>
