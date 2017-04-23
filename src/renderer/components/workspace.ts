@@ -1,4 +1,3 @@
-import electron from "electron";
 import fs from "fs";
 import handlebars from "handlebars";
 import path from "path";
@@ -44,14 +43,14 @@ export default class Workspace extends Vue {
             });
         this.refresh();
 
-        electron.ipcRenderer.send("enable-menus");
+        this.$electron.ipcRenderer.send("enable-menus");
 
-        electron.ipcRenderer.on("reload-files", () => {
+        this.$electron.ipcRenderer.on("reload-files", () => {
             this.refresh();
             this.changeTemplate();
         });
 
-        electron.ipcRenderer.on("export-files", (e, directory) => {
+        this.$electron.ipcRenderer.on("export-files", (e, directory) => {
             console.log("Exporting files to directory: " + directory);
         });
     }
