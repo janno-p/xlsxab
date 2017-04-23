@@ -1,5 +1,5 @@
 <template>
-    <div class="container app">
+    <div class="container-fluid app">
         <component :is="componentName" />
     </div>
 </template>

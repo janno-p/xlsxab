@@ -29,7 +29,6 @@ export default class StartUp extends Vue {
     }
 
     private openWorkspace() {
-        console.log(this.dataDefinition);
         this.$store.commit(OPEN_WORKSPACE, {
             dataDefinition: this.dataDefinition,
             templateFiles: this.templateFiles,

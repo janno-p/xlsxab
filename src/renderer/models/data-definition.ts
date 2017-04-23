@@ -1,7 +1,7 @@
 import fs from "fs";
 import xlsx from "xlsx";
 
-interface IFlight {
+export interface IFlight {
     origin: string;
     originCode: string;
     destination: string;
@@ -10,8 +10,8 @@ interface IFlight {
     disclaimer: boolean;
 }
 
-interface IMarket {
-    flights: any[];
+export interface IMarket {
+    flights: IFlight[];
 }
 
 export interface ILanguage {

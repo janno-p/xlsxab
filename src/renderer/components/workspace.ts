@@ -11,8 +11,14 @@ import {
 } from "vue-property-decorator";
 
 import DataDefinition, {
+    IFlight,
     ILanguage,
+    IMarket,
 } from "../models/data-definition";
+
+interface IHasFlights {
+    flights: IFlight[];
+}
 
 @Component
 export default class Workspace extends Vue {
@@ -41,7 +47,6 @@ export default class Workspace extends Vue {
     private refresh() {
         const data = this.$store.state.dataDefinition;
         data.loadData();
-        console.log(data);
         Vue.set(this, "languages", Object.keys(data.languages || {}).sort());
     }
 
@@ -61,37 +66,12 @@ export default class Workspace extends Vue {
 
         this.fillMarketSelection(language);
 
-        if (!!this.activeTemplate) {
-            const c = fs.readFileSync((this.activeTemplate as any).filepath, "utf8");
-            this.templateInst = handlebars.compile(c);
+        this.reloadTemplate();
+    }
 
-            const l = this.$store.state.dataDefinition.languages[this.activeLanguage].text as object;
-            const d = {};
-            for (const k in Object.keys(l)) {
-                if (l.hasOwnProperty(k)) {
-                    d["t" + (Number(k) + 1)] = l[k];
-                }
-            }
-
-            const wv = this.$refs.webview as Electron.WebViewElement;
-
-            const registerListener = (pos: number) => {
-                const listener = () => {
-                    wv.removeEventListener("did-stop-loading", listener);
-                    wv.executeJavaScript(`document.body.scrollTop = ${pos}`);
-                };
-                wv.addEventListener("did-stop-loading", listener);
-            };
-
-            (wv as Electron.WebViewElement).executeJavaScript("document.body.scrollTop;",
-                false,
-                (r) => registerListener(Number(r)));
-
-            const x = this.templateInst(d);
-            const f = tmp.tmpNameSync({ postfix: ".htm" });
-            fs.writeFileSync(f, x);
-            this.previewFile = "file:" + f;
-        }
+    @Watch("activeMarket")
+    private changeMarket() {
+        this.reloadTemplate();
     }
 
     private fillMarketSelection(language: ILanguage) {
@@ -103,5 +83,50 @@ export default class Workspace extends Vue {
         }
         const indexOfLanguage = markets.indexOf(this.activeLanguage);
         this.activeMarket = markets[indexOfLanguage >= 0 ? indexOfLanguage : 0];
+    }
+
+    private reloadTemplate() {
+        if (!this.activeTemplate) {
+            return;
+        }
+
+        const c = fs.readFileSync((this.activeTemplate as any).filepath, "utf8");
+        this.templateInst = handlebars.compile(c);
+
+        const l = this.$store.state.dataDefinition.languages[this.activeLanguage] as ILanguage;
+        const t = l.text as any;
+        const d = {} as IHasFlights;
+        for (const k in t) {
+            if (t.hasOwnProperty(k)) {
+                d["t" + (Number(k) + 1)] = t[k];
+            }
+        }
+
+        if (!!this.activeMarket) {
+            const m = l.markets[this.activeMarket] as IMarket;
+            (d as IHasFlights).flights = m.flights;
+            m.flights.forEach((element, i) => {
+                d[`flight${i + 1}`] = element;
+            });
+        }
+
+        const wv = this.$refs.webview as Electron.WebViewElement;
+
+        const registerListener = (pos: number) => {
+            const listener = () => {
+                wv.removeEventListener("did-stop-loading", listener);
+                wv.executeJavaScript(`document.body.scrollTop = ${pos}`);
+            };
+            wv.addEventListener("did-stop-loading", listener);
+        };
+
+        (wv as Electron.WebViewElement).executeJavaScript("document.body.scrollTop;",
+            false,
+            (r) => registerListener(Number(r)));
+
+        const x = this.templateInst(d);
+        const f = tmp.tmpNameSync({ postfix: ".htm" });
+        fs.writeFileSync(f, x);
+        this.previewFile = "file:" + f;
     }
 }
