@@ -7,13 +7,13 @@ import Vue from "vue";
 import {
     Component,
     Prop,
-    Watch,
+    Watch
 } from "vue-property-decorator";
 
 import DataDefinition, {
     IFlight,
     ILanguage,
-    IMarket,
+    IMarket
 } from "../models/data-definition";
 
 interface IHasFlights {
@@ -64,7 +64,7 @@ export default class Workspace extends Vue {
     get templates() {
         return (this.$store.state.templateFiles as string[] || []).map((f) => ({
             basename: path.basename(f),
-            filepath: f,
+            filepath: f
         }));
     }
 

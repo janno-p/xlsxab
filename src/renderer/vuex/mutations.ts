@@ -1,4 +1,6 @@
-import { MutationTree } from "vuex";
+import {
+    MutationTree
+} from "vuex";
 
 import state from "./state";
 
@@ -9,7 +11,7 @@ const mutations: MutationTree<typeof state> = {
         state.dataDefinition = dataDefinition;
         state.templateFiles = templateFiles;
         state.hasWorkspace = true;
-    },
+    }
 };
 
 export default mutations;

@@ -10,7 +10,9 @@ Vue.use(KeenUI);
 
 import "bootstrap";
 
-import { store } from "./vuex";
+import {
+    store
+} from "./vuex";
 
 import App from "./components/app.vue";
 
@@ -18,7 +20,7 @@ import App from "./components/app.vue";
 new Vue({
     el: "#app",
     render: (h) => h(App),
-    store,
+    store
 });
 
 import "bootstrap/dist/css/bootstrap-theme.css";

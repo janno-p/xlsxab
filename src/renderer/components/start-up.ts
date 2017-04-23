@@ -1,14 +1,20 @@
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-import { OPEN_WORKSPACE } from "../vuex/mutation-types";
+
+import {
+    Component
+} from "vue-property-decorator";
+
+import {
+    OPEN_WORKSPACE
+} from "../vuex/mutation-types";
 
 import DataDefinition from "../models/data-definition";
 import SheetSelector from "./sheet-selector.vue";
 
 @Component({
     components: {
-        SheetSelector,
-    },
+        SheetSelector
+    }
 })
 export default class StartUp extends Vue {
     private dataDefinition: DataDefinition = null;
@@ -31,7 +37,7 @@ export default class StartUp extends Vue {
     private openWorkspace() {
         this.$store.commit(OPEN_WORKSPACE, {
             dataDefinition: this.dataDefinition,
-            templateFiles: this.templateFiles,
+            templateFiles: this.templateFiles
         });
     }
 

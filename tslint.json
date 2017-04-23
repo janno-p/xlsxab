@@ -9,6 +9,13 @@
             "allow-leading-underscore",
             "ban-keywords",
             "check-format"
+        ],
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "never",
+                "singleline": "never"
+            }
         ]
     }
 }

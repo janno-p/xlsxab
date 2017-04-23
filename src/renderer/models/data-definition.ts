@@ -103,7 +103,7 @@ export default class DataDefinition {
                 disclaimer: !!disclaimerCell && String(disclaimerCell.v).trim() === "*",
                 origin: this._airports[originCode],
                 originCode,
-                price: String(priceCell.v),
+                price: String(priceCell.v)
             });
         }
     }

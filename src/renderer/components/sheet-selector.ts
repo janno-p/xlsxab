@@ -4,7 +4,7 @@ import xlsx from "xlsx";
 import {
     Component,
     Prop,
-    Watch,
+    Watch
 } from "vue-property-decorator";
 
 import DataDefinition from "../models/data-definition";

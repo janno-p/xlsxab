@@ -10,14 +10,14 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state,
-    mutations,
+    mutations
 });
 
 if (module.hot) {
     module.hot.accept(["./mutations"], () => {
         const newMutations = require("./mutations").default;
         store.hotUpdate({
-            mutations: newMutations,
+            mutations: newMutations
         });
     });
 }

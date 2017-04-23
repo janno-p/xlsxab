@@ -3,7 +3,7 @@ import path from "path";
 import url from "url";
 
 import installExtensions, {
-    VUEJS_DEVTOOLS,
+    VUEJS_DEVTOOLS
 } from "electron-devtools-installer";
 
 const app = electron.app;
@@ -20,34 +20,34 @@ function createMenu() {
         click: (e) => {
             mainWindow.webContents.send("reload-files");
         },
-        label: "Reload files",
+        label: "Reload files"
     }));
 
     workspaceMenu.append(new electron.MenuItem({
         click: (e) => {
             const directory = electron.dialog.showOpenDialog(mainWindow, {
-                properties: ["openDirectory"],
+                properties: ["openDirectory"]
             });
             if (!!directory) {
                 mainWindow.webContents.send("export-files", directory[0]);
             }
         },
-        label: "Save to folder",
+        label: "Save to folder"
     }));
 
     fileMenu.append(new electron.MenuItem({
         click: (e) => mainWindow.close(),
-        label: "Quit",
+        label: "Quit"
     }));
 
     menu.append(new electron.MenuItem({
         label: "File",
-        submenu: fileMenu,
+        submenu: fileMenu
     }));
 
     const workspaceMenuItem = new electron.MenuItem({
         label: "Workspace",
-        submenu: workspaceMenu,
+        submenu: workspaceMenu
     });
 
     electron.ipcMain.on("enable-menus", () => {
@@ -61,7 +61,7 @@ function createMenu() {
 function createWindow() {
     mainWindow = new BrowserWindow({
         height: 600,
-        width: 800,
+        width: 800
     });
 
     mainWindow.webContents.on("devtools-opened", () => {
