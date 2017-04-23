@@ -1,3 +1,4 @@
+import electron from "electron";
 import fs from "fs";
 import handlebars from "handlebars";
 import path from "path";
@@ -42,6 +43,11 @@ export default class Workspace extends Vue {
                 this.previewHeight = browserWindow.getContentBounds().height / 2;
             });
         this.refresh();
+
+        electron.ipcRenderer.on("reload-files", () => {
+            this.refresh();
+            this.changeTemplate();
+        });
     }
 
     private refresh() {

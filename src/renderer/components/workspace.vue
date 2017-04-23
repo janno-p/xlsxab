@@ -2,14 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-md-2">
-                    <ui-button
-                        color="primary"
-                        @click="refresh"
-                    ><i class="fa fa-refresh"></i>&nbsp;Reload Files
-                    </ui-button>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <ui-select
                         placeholder="Choose template"
                         :disabled="templates.length === 0"
@@ -19,7 +12,7 @@
                     ><i class="fa fa-file-o" slot="icon"></i>
                     </ui-select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <ui-select
                         placeholder="No languages found"
                         :disabled="languages.length === 0"
@@ -28,7 +21,7 @@
                     ><i class="fa fa-language" slot="icon"></i>
                     </ui-select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <ui-select
                         :label="null"
                         placeholder="No markets for language"

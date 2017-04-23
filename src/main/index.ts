@@ -11,6 +11,41 @@ const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow: Electron.BrowserWindow = null;
 
+function createMenu() {
+    const fileMenu = new electron.Menu();
+
+    fileMenu.append(new electron.MenuItem({
+        click: (e) => {
+            mainWindow.webContents.send("reload-files");
+        },
+        label: "Reload files",
+    }));
+
+    fileMenu.append(new electron.MenuItem({
+        label: "Save to folder",
+    }));
+
+    fileMenu.append(new electron.MenuItem({
+        type: "separator",
+    }));
+
+    fileMenu.append(new electron.MenuItem({
+        click: (e) => mainWindow.close(),
+        label: "Quit",
+    }));
+
+    const fileMenuItem = new electron.MenuItem({
+        label: "File",
+        submenu: fileMenu,
+    });
+
+    const menu = new electron.Menu();
+
+    menu.append(fileMenuItem);
+
+    return menu;
+}
+
 function createWindow() {
     mainWindow = new BrowserWindow({
         height: 600,
@@ -23,7 +58,8 @@ function createWindow() {
             .catch((err) => console.log("Unable to install `vue-devtools`:\n", err));
     });
 
-    // mainWindow.setMenu(null);
+    mainWindow.setMenu(createMenu());
+
     // mainWindow.loadURL(url.format({
     //     pathname: path.join(__dirname, "..", "assets", "index.html"),
     //     protocol: "file",
