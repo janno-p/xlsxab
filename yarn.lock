@@ -209,17 +209,17 @@ autosize@^3.0.20:
   version "3.0.20"
   resolved "https://registry.yarnpkg.com/autosize/-/autosize-3.0.20.tgz#e343ea7c5603834738169420f0349dc953e62a9e"
 
-awesome-typescript-loader@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-3.1.2.tgz#3df192b91a6285f795ca65e63aad114fbb44f710"
+awesome-typescript-loader@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-3.1.3.tgz#7eb41dfb136c2ea0e099bef038dc70c45f810223"
   dependencies:
     colors "^1.1.2"
     enhanced-resolve "^3.1.0"
-    loader-utils "^1.0.2"
+    loader-utils "^1.1.0"
     lodash "^4.17.4"
     mkdirp "^0.5.1"
     object-assign "^4.1.1"
-    source-map-support "^0.4.11"
+    source-map-support "^0.4.15"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -664,11 +664,10 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
-crc-32@~1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/crc-32/-/crc-32-1.0.1.tgz#2efbddb7ccbb7beb4d181803b10e33a29c9fd214"
+crc-32@~1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/crc-32/-/crc-32-1.0.2.tgz#09507984ee9bcce3bd1b8861f0de8ab10ae8187d"
   dependencies:
-    concat-stream ""
     exit-on-epipe ""
     printj ""
 
@@ -950,9 +949,9 @@ electron-to-chromium@^1.2.7:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.2.tgz#b8ce5c93b308db0e92f6d0435c46ddec8f6363ab"
 
-electron@^1.6.5:
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.6.5.tgz#6408d738025bc34f7c0ce8ee8827539475680a99"
+electron@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.6.6.tgz#17df8cdf73ec2c04cfad7abb413579b8b8dafc28"
   dependencies:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
@@ -1013,10 +1012,6 @@ escape-string-regexp@^1.0.2:
 esprima@^2.6.0:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
-
-esprima@^3.1.1:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
 
 esutils@^2.0.2:
   version "2.0.2"
@@ -1228,9 +1223,11 @@ forwarded@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
 
-frac@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/frac/-/frac-0.3.1.tgz#577677b7fdcbe6faf7c461f1801d34137cda4354"
+frac@~1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/frac/-/frac-1.0.6.tgz#9a0dfc23956852a8b320623bebcf1be9ea048229"
+  dependencies:
+    voc ""
 
 fresh@0.5.0:
   version "0.5.0"
@@ -1355,9 +1352,9 @@ handle-thing@^1.2.4:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
-handlebars@^4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.6.tgz#2ce4484850537f9c97a8026d5399b935c4ed4ed7"
+handlebars@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.7.tgz#e97325aeb8ea0b9e12b9c4dd73c4c312ad0ede59"
   dependencies:
     async "^1.4.0"
     optimist "^0.6.1"
@@ -1709,14 +1706,7 @@ js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
 
-js-yaml@^3.4.3:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.2.tgz#02d3e2c0f6beab20248d412c352203827d786721"
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^3.1.1"
-
-js-yaml@~3.7.0:
+js-yaml@^3.4.3, js-yaml@~3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.7.0.tgz#5c967ddd837a9bfdca5f2de84253abe8a1c03b80"
   dependencies:
@@ -2868,6 +2858,12 @@ resolve@^1.3.2:
   dependencies:
     path-parse "^1.0.5"
 
+resolve@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
+  dependencies:
+    path-parse "^1.0.5"
+
 right-align@^0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/right-align/-/right-align-0.1.3.tgz#61339b722fe6a3515689210d24e14c96148613ef"
@@ -3017,9 +3013,9 @@ source-list-map@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-1.1.1.tgz#1a33ac210ca144d1e561f906ebccab5669ff4cb4"
 
-source-map-support@^0.4.11:
-  version "0.4.14"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.14.tgz#9d4463772598b86271b4f523f6c1f4e02a7d6aef"
+source-map-support@^0.4.15:
+  version "0.4.15"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.15.tgz#03202df65c06d2bd8c7ec2362a193056fef8d3b1"
   dependencies:
     source-map "^0.5.6"
 
@@ -3075,12 +3071,12 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
-ssf@~0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/ssf/-/ssf-0.9.0.tgz#eab445edc8c85bc1b637eaa62c3cf0ace92b7148"
+ssf@~0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/ssf/-/ssf-0.9.1.tgz#38a3d1619837a2b5b7bf754375c7d3a9ee4bc99a"
   dependencies:
     colors "0.6.2"
-    frac "0.3.1"
+    frac "~1.0.6"
     voc ""
 
 sshpk@^1.7.0:
@@ -3337,9 +3333,9 @@ typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.2.tgz#606022508479b55ffa368b58fee963a03dfd7b0c"
+typescript@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.2.tgz#f0f045e196f69a72f06b25fd3bd39d01c3ce9984"
 
 uglify-js@^2.6, uglify-js@^2.8.5:
   version "2.8.18"
@@ -3458,13 +3454,13 @@ vue-electron@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vue-electron/-/vue-electron-1.0.6.tgz#e798e03180b8933539defe31f92e53b9242b9406"
 
-vue-hot-reload-api@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.11.tgz#bf26374fb73366ce03f799e65ef5dfd0e28a1568"
+vue-hot-reload-api@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
 
-vue-loader@^11.3.4:
-  version "11.3.4"
-  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-11.3.4.tgz#65e10a44ce092d906e14bbc72981dec99eb090d2"
+vue-loader@^12.0.2:
+  version "12.0.2"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-12.0.2.tgz#f539036b1e0e9516b474a8fd1b5f533145248406"
   dependencies:
     consolidate "^0.14.0"
     hash-sum "^1.0.2"
@@ -3474,28 +3470,29 @@ vue-loader@^11.3.4:
     postcss "^5.0.21"
     postcss-load-config "^1.1.0"
     postcss-selector-parser "^2.0.0"
+    resolve "^1.3.3"
     source-map "^0.5.6"
-    vue-hot-reload-api "^2.0.11"
-    vue-style-loader "^2.0.0"
+    vue-hot-reload-api "^2.1.0"
+    vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
-vue-property-decorator@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-4.0.0.tgz#42a0b00d30e53ffc57af0ae10498777981c6d2c4"
+vue-property-decorator@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-5.0.1.tgz#1be12d62e84b0c83732a03df7a4a8f882a410001"
   dependencies:
     reflect-metadata "^0.1.9"
     vue-class-component "^5.0.0"
 
-vue-style-loader@^2.0.0:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-2.0.5.tgz#f0efac992febe3f12e493e334edb13cd235a3d22"
+vue-style-loader@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-3.0.1.tgz#c8b639bb2f24baf9d78274dc17e4f264c1deda08"
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.2.6.tgz#2e2928daf0cd0feca9dfc35a9729adeae173ec68"
+vue-template-compiler@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.3.0.tgz#a89a17064b68e182569da51ebbedd71ce57f93bf"
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -3504,9 +3501,13 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.1.tgz#0c36cc57aa3a9ec13e846342cb14a72fcac8bd93"
 
-vue@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.2.6.tgz#451714b394dd6d4eae7b773c40c2034a59621aed"
+vue@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.0.tgz#bc44db0488c5245c788304c7683efe7b4c862d82"
+
+vuex-class@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vuex-class/-/vuex-class-0.2.0.tgz#84fb2f34ddbf7384381576ed3222b3d2abad5649"
 
 vuex@^2.3.1:
   version "2.3.1"
@@ -3535,9 +3536,9 @@ webpack-dev-middleware@^1.10.2:
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-webpack-dev-server@^2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-2.4.3.tgz#ead74bfdc78049684734724ca54000a17509c5f5"
+webpack-dev-server@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-2.4.5.tgz#31384ce81136be1080b4b4cde0eb9b90e54ee6cf"
   dependencies:
     ansi-html "0.0.7"
     chokidar "^1.6.0"
@@ -3640,17 +3641,17 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-xlsx@^0.9.12:
-  version "0.9.12"
-  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.9.12.tgz#97c558ba71dab088ce8949a4100b8774079601f2"
+xlsx@^0.9.13:
+  version "0.9.13"
+  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.9.13.tgz#5861d11e10a1f99b6f2b491e2d119a7777d066e7"
   dependencies:
     adler-32 "~1.0.0"
     cfb "~0.11.1"
     codepage "~1.8.0"
     commander "~2.9.0"
-    crc-32 "~1.0.0"
+    crc-32 "~1.0.2"
     exit-on-epipe "~1.0.0"
-    ssf "~0.9.0"
+    ssf "~0.9.1"
 
 xtend@^4.0.0:
   version "4.0.1"
