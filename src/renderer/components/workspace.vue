@@ -33,11 +33,11 @@
                 </div>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style="padding: 0">
             <webview
                 ref="webview"
+                style="height: calc(100vh - 112px)"
                 :src="previewFile"
-                :style="{ height: 'calc(100vh - 148px)', 'margin-top': '0.5em' }"
             ></webview>
         </div>
     </div>

@@ -7,7 +7,7 @@ import state from "./state";
 import * as types from "./mutation-types";
 
 const mutations: MutationTree<typeof state> = {
-    [types.OPEN_WORKSPACE](state, { dataDefinition, templateFiles }) {
+    [types.OPEN_WORKSPACE](state, { dataDefinition, templateFiles }: types.IOpenWorkspace) {
         state.dataDefinition = dataDefinition;
         state.templateFiles = templateFiles;
         state.hasWorkspace = true;

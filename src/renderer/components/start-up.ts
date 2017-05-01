@@ -5,6 +5,11 @@ import {
 } from "vue-property-decorator";
 
 import {
+    Mutation
+} from "vuex-class";
+
+import {
+    IOpenWorkspace,
     OPEN_WORKSPACE
 } from "../vuex/mutation-types";
 
@@ -17,6 +22,8 @@ import SheetSelector from "./sheet-selector.vue";
     }
 })
 export default class StartUp extends Vue {
+    @Mutation(OPEN_WORKSPACE) private openWorkspaceMutation: (args: IOpenWorkspace) => void;
+
     private dataDefinition: DataDefinition = null;
     private dataFile: string = null;
     private templateFiles: string[] = [];
@@ -35,7 +42,7 @@ export default class StartUp extends Vue {
     }
 
     private openWorkspace() {
-        this.$store.commit(OPEN_WORKSPACE, {
+        this.openWorkspaceMutation({
             dataDefinition: this.dataDefinition,
             templateFiles: this.templateFiles
         });

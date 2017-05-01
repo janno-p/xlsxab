@@ -1,6 +1,7 @@
 import fs from "fs";
 import handlebars from "handlebars";
 import path from "path";
+import sanitize from "sanitize-filename";
 import tmp from "tmp";
 import Vue from "vue";
 
@@ -9,6 +10,10 @@ import {
     Prop,
     Watch
 } from "vue-property-decorator";
+
+import {
+    State
+} from "vuex-class";
 
 import DataDefinition, {
     IFlight,
@@ -22,6 +27,9 @@ interface IHasFlights {
 
 @Component
 export default class Workspace extends Vue {
+    @State private dataDefinition: DataDefinition;
+    @State private templateFiles: string[];
+
     private indicator = "";
     private previewHeight = this.$electron.remote.getCurrentWindow().getContentBounds().height / 2;
     private activeLanguage = "DEFAULT";
@@ -51,18 +59,18 @@ export default class Workspace extends Vue {
         });
 
         this.$electron.ipcRenderer.on("export-files", (e, directory) => {
-            console.log("Exporting files to directory: " + directory);
+            this.saveFilesToFolder(directory);
         });
     }
 
     private refresh() {
-        const data = this.$store.state.dataDefinition;
+        const data = this.dataDefinition;
         data.loadData();
         Vue.set(this, "languages", Object.keys(data.languages || {}).sort());
     }
 
     get templates() {
-        return (this.$store.state.templateFiles as string[] || []).map((f) => ({
+        return (this.templateFiles || []).map((f) => ({
             basename: path.basename(f),
             filepath: f
         }));
@@ -72,7 +80,7 @@ export default class Workspace extends Vue {
     @Watch("activeTemplate")
     private changeTemplate() {
         const language = !!this.activeLanguage
-            ? this.$store.state.dataDefinition.languages[this.activeLanguage]
+            ? this.dataDefinition.languages[this.activeLanguage]
             : null;
 
         this.fillMarketSelection(language);
@@ -104,23 +112,7 @@ export default class Workspace extends Vue {
         const c = fs.readFileSync((this.activeTemplate as any).filepath, "utf8");
         this.templateInst = handlebars.compile(c);
 
-        const l = this.$store.state.dataDefinition.languages[this.activeLanguage] as ILanguage;
-        const t = l.text as any;
-        const d = {} as IHasFlights;
-        for (const k in t) {
-            if (t.hasOwnProperty(k)) {
-                d["t" + (Number(k) + 1)] = t[k];
-            }
-        }
-
-        if (!!this.activeMarket) {
-            const m = l.markets[this.activeMarket] as IMarket;
-            (d as IHasFlights).flights = m.flights;
-            m.flights.forEach((element, i) => {
-                d[`flight${i + 1}`] = element;
-            });
-        }
-
+        const data = this.buildData(this.activeLanguage, this.activeMarket);
         const wv = this.$refs.webview as Electron.WebViewElement;
 
         const registerListener = (pos: number) => {
@@ -135,9 +127,61 @@ export default class Workspace extends Vue {
             false,
             (r) => registerListener(Number(r)));
 
-        const x = this.templateInst(d);
+        const x = this.templateInst(data);
         const f = tmp.tmpNameSync({ postfix: ".htm" });
         fs.writeFileSync(f, x);
         this.previewFile = "file:" + f;
+    }
+
+    private buildData(languageCode: string, marketCode: string) {
+        const language = this.dataDefinition.languages[languageCode] as ILanguage;
+        const text = language.text as any;
+
+        const data = {} as IHasFlights;
+        for (const key in text) {
+            if (text.hasOwnProperty(key)) {
+                data["t" + (Number(key) + 1)] = text[key];
+            }
+        }
+
+        if (!!marketCode) {
+            const market = language.markets[marketCode] as IMarket;
+            (data as IHasFlights).flights = market.flights;
+            market.flights.forEach((element, i) => {
+                data[`flight${i + 1}`] = element;
+            });
+        }
+
+        return data;
+    }
+
+    private saveFilesToFolder(folder: string) {
+        this.templates.forEach((template) => {
+            const templateContent = fs.readFileSync(template.filepath, "utf8");
+            const templateInstance = handlebars.compile(templateContent);
+
+            this.languages.forEach((languageCode) => {
+                const language = this.dataDefinition.languages[languageCode] as ILanguage;
+                const markets = Object.keys(!!language ? language.markets || {} : {}).sort();
+                markets.forEach((marketCode) => {
+                    const data = this.buildData(languageCode, marketCode);
+
+                    const renderedContent = templateInstance(data);
+                    const file = path.join(folder, this.getFileName(template.basename, languageCode, marketCode));
+
+                    fs.writeFileSync(file, renderedContent);
+                });
+            });
+        });
+    }
+
+    private getFileName(templateName: string, languageCode: string, marketCode: string) {
+        const extensionIndex = templateName.lastIndexOf(".");
+        const name = templateName.substring(0, extensionIndex);
+        const extension = templateName.substring(extensionIndex + 1);
+
+        return sanitize(`${name}_${languageCode}_${marketCode}.${extension}`, {
+            replacement: "-"
+        }).replace(/\s+/g, "-");
     }
 }
