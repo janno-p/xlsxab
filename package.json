@@ -36,7 +36,7 @@
     "vuex": "^2.3.1",
     "vuex-class": "^0.2.0",
     "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.5",
+    "webpack-dev-server": "^3.1.11",
     "xlsx": "^0.9.13"
   },
   "scripts": {
