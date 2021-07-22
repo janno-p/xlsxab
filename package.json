@@ -37,7 +37,7 @@
     "vuex-class": "^0.2.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5",
-    "xlsx": "^0.9.13"
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "electron .",
